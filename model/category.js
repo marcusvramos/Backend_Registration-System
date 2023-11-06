@@ -1,8 +1,12 @@
+import CategoryDAO from "../persistencia/categoryDAO.js";
+
 export default class Category {
+  #id;
   #name;
   #description;
 
-  constructor(name = "", description = "") {
+  constructor(id = 0, name = "", description = "") {
+    this.#id = id;
     this.#name = name;
     this.#description = description;
   }
@@ -23,18 +27,38 @@ export default class Category {
     this.#description = newDescription;
   }
 
+  get id(){
+    return this.#description;
+  }
+
+  set id(newId){
+    this.#id = newId;
+  }
   toJSON() {
     return {
+      id: this.#id,
       name: this.#name,
       description: this.#description,
     };
   }
 
-  async gravar() {}
+  async gravar() {
+    const catDAO = new CategoryDAO();
+    await catDAO.gravar(this);
+  }
 
-  async excluir() {}
+  async excluir() {
+    const catDAO = new CategoryDAO();
+    await catDAO.excluir(this);
+  }
 
-  async alterar() {}
+  async atualizar() {
+    const catDAO = new CategoryDAO();
+    await catDAO.atualizar(this);
+  }
 
-  async consultar() {}
+  async consultar(parametro) {
+    const catDAO = new CategoryDAO();
+    return await catDAO.consultar(parametro);
+  }
 }
