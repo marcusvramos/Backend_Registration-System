@@ -1,14 +1,25 @@
-import Product from "./model/product.js";
-import Category from "./model/category.js";
-import Provider from "./model/provider.js";
+import express  from "express"
+import cors from "cors"
+import categoryRoute from "./routes/category-route.js"
 
-const category = new Category(3, "Categoria 02", "Camisetas Infantis");
+const app = express()
 
-// category.gravar().then(() => {
-//   console.log(category.toJSON());
-// })
 
-category.consultar(4).then((resp) => {
-  console.log(JSON.stringify(resp[0]));
+app.use(cors({
+    origins:"*",
+    methods:"GET,HEAD,PATCH,POST,DELETE,PUT",
+    preflightContinue: false,
+    optionsSuccessStatus: 204
+}));
+
+app.use(express.urlencoded({extended:true}));
+
+app.use(express.json());
+
+app.use("/category",categoryRoute);
+
+app.get("/",(req,res)=>{
+    res.send("Olá");
 })
 
+app.listen(3000);
