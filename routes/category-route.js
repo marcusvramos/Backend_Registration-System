@@ -6,6 +6,7 @@ const controller = new CategoryController();
 
 categoryRoute.post("/", controller.post);
 categoryRoute.get("/", controller.consultar);
+categoryRoute.get("/:id", controller.consultar);
 categoryRoute.put("/", controller.atualizar);
 categoryRoute.delete("/", controller.delete)
 

@@ -93,7 +93,7 @@ export default class CategoryController {
     consultar(req,res){
         res.type("application/json");
         if(req.method === "GET"){
-            const {description, id} = req.body;
+            const {description, id} = req.params;
             const parametro = id ?? description;
             const category = new Category();
             category.consultar(parametro).then((lista)=>{
