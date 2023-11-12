@@ -49,7 +49,7 @@ export default class CategoryDAO {
       if (!parametrosDaConsulta) {
         parametrosDaConsulta = "";
       } else {
-        sql = "SELECT * FROM category WHERE cat_description like ?";
+        sql = "SELECT * FROM category WHERE cat_name like ?";
         parametros = [`%${parametrosDaConsulta}%`];
       }
     }

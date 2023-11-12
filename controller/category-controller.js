@@ -111,7 +111,35 @@ export default class CategoryController {
     }
   }
 
-  consultar(req, res) {
-    resposta.type("application/json");
+  get(req, res) {
+    res.type("application/json");
+    if (req.method === "GET") {
+      const { name } = req.query;
+      const { id } = req.params;
+      let parametro = "";
+
+      if (name) {
+        parametro = name;
+      } else if (id) {
+        parametro = id;
+      }
+
+      const category = new Category();
+      category
+        .consultar(parametro)
+        .then((lista) => {
+          res.status(200).send({
+            status: true,
+            message: "Consulta realizada",
+            lista: lista,
+          });
+        })
+        .catch((e) => {
+          res.status(500).send({
+            status: false,
+            message: e,
+          });
+        });
+    }
   }
 }
