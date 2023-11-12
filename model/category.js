@@ -28,7 +28,7 @@ export default class Category {
   }
 
   get id(){
-    return this.#description;
+    return this.#id;
   }
 
   set id(newId){

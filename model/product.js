@@ -1,4 +1,5 @@
 export default class Product {
+  #id
   #name;
   #description;
   #unitPrice;
@@ -10,6 +11,7 @@ export default class Product {
   #provider;
 
   constructor(
+    id = "",
     name = "",
     description = "",
     unitPrice = 0,
@@ -20,6 +22,7 @@ export default class Product {
     category = {},
     provider = {}
   ) {
+    this.#id = id;
     this.#name = name;
     this.#description = description;
     this.#unitPrice = unitPrice;
@@ -29,6 +32,14 @@ export default class Product {
     this.#manufacturingDate = manufacturingDate;
     this.#category = category;
     this.#provider = provider;
+  }
+
+  get id() {
+    return this.#id;
+  }
+
+  set id(newId) {
+    this.#id = newId;
   }
 
   get name() {

@@ -1,4 +1,5 @@
-export default class Product {
+export default class Provider {
+  #id;
   #document;
   #name;
   #phoneNumber;
@@ -7,6 +8,7 @@ export default class Product {
   #description;
 
   constructor(
+    id = "",
     document = "",
     name = "",
     phoneNumber = "",
@@ -14,12 +16,21 @@ export default class Product {
     website = "",
     description = ""
   ) {
+    this.#id = id;
     this.#document = document;
     this.#name = name;
     this.#phoneNumber = phoneNumber;
     this.#email = email;
     this.#website = website;
     this.#description = description;
+  }
+
+  get id() {
+    return this.#id;
+  }
+
+  set id(newId) {
+    this.#id = newId;
   }
 
   get name() {

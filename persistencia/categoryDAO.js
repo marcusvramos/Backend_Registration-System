@@ -19,7 +19,7 @@ export default class CategoryDAO {
   async atualizar(category) {
     if (category instanceof Category) {
       const sql =
-        "UPDATE category SET (cat_name = ?, cat_description = ?) WHERE cat_id = ?";
+        "UPDATE category SET cat_name = ?, cat_description = ? WHERE cat_id = ?";
       const parametros = [category.name, category.description, category.id];
       const conexao = await conectar();
       await conexao.execute(sql, parametros);
