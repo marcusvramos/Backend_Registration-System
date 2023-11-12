@@ -1,5 +1,7 @@
+import ProductDAO from "../persistencia/productDAO.js";
+
 export default class Product {
-  #id
+  #id;
   #name;
   #description;
   #unitPrice;
@@ -51,7 +53,7 @@ export default class Product {
   }
 
   get description() {
-    return this.#name;
+    return this.#description;
   }
 
   set description(newDescription) {
@@ -91,7 +93,7 @@ export default class Product {
   }
 
   get manufacturingDate() {
-    return this.#model;
+    return this.#manufacturingDate;
   }
 
   set manufacturingDate(newManufacturingDate) {
@@ -128,11 +130,23 @@ export default class Product {
     };
   }
 
-  async gravar() {}
+  async gravar() {
+    const prodDAO = new ProductDAO();
+    await prodDAO.gravar(this);
+  }
 
-  async excluir() {}
+  async excluir() {
+    const prodDAO = new ProductDAO();
+    await prodDAO.excluir(this);
+  }
 
-  async alterar() {}
+  async atualizar() {
+    const prodDAO = new ProductDAO();
+    await prodDAO.atualizar(this);
+  }
 
-  async consultar() {}
+  async consultar(parametro) {
+    const prodDAO = new ProductDAO();
+    return await prodDAO.consultar(parametro);
+  }
 }

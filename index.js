@@ -1,25 +1,30 @@
-import express  from "express"
-import cors from "cors"
-import categoryRoute from "./routes/category-route.js"
+import express from "express";
+import cors from "cors";
+import categoryRoute from "./routes/category-route.js";
+import providerRoute from "./routes/provider-route.js";
+import productRoute from "./routes/product-route.js";
 
-const app = express()
+const app = express();
 
-
-app.use(cors({
-    origins:"*",
-    methods:"GET,HEAD,PATCH,POST,DELETE,PUT",
+app.use(
+  cors({
+    origins: "*",
+    methods: "GET,HEAD,PATCH,POST,DELETE,PUT",
     preflightContinue: false,
-    optionsSuccessStatus: 204
-}));
+    optionsSuccessStatus: 204,
+  })
+);
 
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({ extended: true }));
 
 app.use(express.json());
 
-app.use("/category",categoryRoute);
+app.use("/category", categoryRoute);
+app.use("/provider", providerRoute);
+app.use("/product", productRoute);
 
-app.get("/",(req,res)=>{
-    res.send("Olá");
-})
+app.get("/", (req, res) => {
+  res.send("Olá");
+});
 
 app.listen(3000);

@@ -43,23 +43,26 @@ export default class CategoryDAO {
     let sql = "";
     let parametros = [];
     if (!isNaN(parseInt(parametrosDaConsulta))) {
-      sql = "SELECT * FROM category WHERE cat_id = ? order by cat_description";
+      sql = "SELECT * FROM category WHERE cat_id = ? order by cat_name";
       parametros = [parametrosDaConsulta];
+    } else if (parametrosDaConsulta != "") {
+      sql = "SELECT * FROM category WHERE cat_name like ?";
+      parametros = [`%${parametrosDaConsulta}%`];
     } else {
-      if (!parametrosDaConsulta) {
-        parametrosDaConsulta = "";
-      } else {
-        sql = "SELECT * FROM category WHERE cat_name like ?";
-        parametros = [`%${parametrosDaConsulta}%`];
-      }
+      sql = "SELECT * FROM category order by cat_name";
+      parametros = [""];
     }
 
     const conexao = await conectar();
     const [registros, campos] = await conexao.execute(sql, parametros);
     let listaCategorias = [];
-    for(const registro of registros){
-        const categoria = new Category(registro.cat_id, registro.cat_name, registro.cat_description);
-        listaCategorias.push(categoria);
+    for (const registro of registros) {
+      const categoria = new Category(
+        registro.cat_id,
+        registro.cat_name,
+        registro.cat_description
+      );
+      listaCategorias.push(categoria);
     }
 
     return listaCategorias;

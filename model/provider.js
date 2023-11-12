@@ -1,3 +1,5 @@
+import ProviderDAO from "../persistencia/providerDAO.js";
+
 export default class Provider {
   #id;
   #document;
@@ -17,9 +19,9 @@ export default class Provider {
     description = ""
   ) {
     this.#id = id;
-    this.#document = document;
+    this.#document = document.replace(/\D/g, "");
     this.#name = name;
-    this.#phoneNumber = phoneNumber;
+    this.#phoneNumber = phoneNumber.replace(/\D/g, "");
     this.#email = email;
     this.#website = website;
     this.#description = description;
@@ -92,11 +94,23 @@ export default class Provider {
     };
   }
 
-  async gravar() {}
+  async gravar() {
+    const provDAO = new ProviderDAO();
+    await provDAO.gravar(this);
+  }
 
-  async excluir() {}
+  async excluir() {
+    const provDAO = new ProviderDAO();
+    await provDAO.excluir(this);
+  }
 
-  async alterar() {}
+  async atualizar() {
+    const provDAO = new ProviderDAO();
+    await provDAO.atualizar(this);
+  }
 
-  async consultar() {}
+  async consultar(parametro) {
+    const provDAO = new ProviderDAO();
+    return await provDAO.consultar(parametro);
+  }
 }
