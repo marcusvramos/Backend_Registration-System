@@ -33,3 +33,15 @@ CREATE TABLE product(
     CONSTRAINT fk_prod_category FOREIGN KEY(cat_id) REFERENCES category (cat_id),
     CONSTRAINT fk_prod_supplier FOREIGN KEY(sup_id) REFERENCES supplier (sup_id)
 );
+
+CREATE TABLE client(
+    cli_id INT NOT NULL AUTO_INCREMENT,
+    cli_document VARCHAR(11) NOT NULL,
+    cli_name VARCHAR(20) NOT NULL,
+    cli_neighborhood VARCHAR(20) NOT NULL,
+    cli_address VARCHAR(20) NOT NULL,
+    cli_city VARCHAR(20) NOT NULL,
+    cli_uf VARCHAR(2) NOT NULL,
+    cli_number VARCHAR (5) NOT NULL,
+    cli_zipCode VARCHAR(8) NOT NULL
+)
