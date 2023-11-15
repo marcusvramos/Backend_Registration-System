@@ -3,6 +3,7 @@ import cors from "cors";
 import categoryRoute from "./routes/category-route.js";
 import providerRoute from "./routes/provider-route.js";
 import productRoute from "./routes/product-route.js";
+import clientRoute from './routes/client-route.js';
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(express.json());
 app.use("/category", categoryRoute);
 app.use("/provider", providerRoute);
 app.use("/product", productRoute);
+app.use("/client", clientRoute);
 
 app.get("/", (req, res) => {
   res.send("Olá");

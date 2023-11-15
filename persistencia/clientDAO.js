@@ -29,8 +29,8 @@ export default class ClientDAO {
   async atualizar(client) {
     if (client instanceof Client) {
       const sql =
-        "UPDATE client SET cli_document = ?, cli_name = ?, cli_neighborhood = ?\
-        cli_address = ?, cli_city = ?, cli_uf = ?, cli_number = ?, cli_zipCode = ? WHERE cli_id = ?";
+        "UPDATE client SET cli_document=?, cli_name=?, cli_neighborhood=?,\
+        cli_address=?, cli_city=?, cli_uf=?, cli_number=?, cli_zipCode=? WHERE cli_id=?";
       const parametros = [
         client.document,
         client.name,
@@ -61,6 +61,7 @@ export default class ClientDAO {
   }
 
   async consultar(parametrosDaConsulta) {
+    console.log(parametrosDaConsulta);
     let sql = "";
     let parametros = [];
     if (!isNaN(parseInt(parametrosDaConsulta))) {
@@ -78,10 +79,16 @@ export default class ClientDAO {
     const [registros, campos] = await conexao.execute(sql, parametros);
     let listaCategorias = [];
     for (const registro of registros) {
-      const categoria = new client(
-        registro.cat_id,
-        registro.cat_name,
-        registro.cat_description
+      const categoria = new Client(
+        registro.cli_id,
+        registro.cli_document,
+        registro.cli_name,
+        registro.cli_neighborhood,
+        registro.cli_address,
+        registro.cli_city,
+        registro.cli_uf,
+        registro.cli_number,
+        registro.cli_zipCode
       );
       listaCategorias.push(categoria);
     }

@@ -1,13 +1,13 @@
 import { Router } from "express";
 import ClientController from "../controller/client-controller.js";
 
-const categoryRoute = new Router();
+const clientRoute = new Router();
 const controller = new ClientController();
 
-categoryRoute.post("/", controller.post);
-categoryRoute.put("/:id", controller.put);
-categoryRoute.delete("/:id", controller.delete);
-categoryRoute.get("/", controller.get);
-categoryRoute.get("/:id", controller.get);
+clientRoute.post("/", controller.post);
+clientRoute.put("/:id", controller.put);
+clientRoute.delete("/:id", controller.delete);
+clientRoute.get("/", controller.get);
+clientRoute.get("/:id", controller.get);
 
-export default categoryRoute;
+export default clientRoute;

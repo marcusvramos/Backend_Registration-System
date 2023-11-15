@@ -44,4 +44,4 @@ CREATE TABLE client(
     cli_uf VARCHAR(2) NOT NULL,
     cli_number VARCHAR (5) NOT NULL,
     cli_zipCode VARCHAR(8) NOT NULL
-)
+);
