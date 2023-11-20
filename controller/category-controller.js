@@ -14,6 +14,7 @@ export default class CategoryController {
               res.status(200).send({
                 status: true,
                 message: "Categoria cadastrada!",
+                categoria: category,
               });
             })
             .catch((e) => {
