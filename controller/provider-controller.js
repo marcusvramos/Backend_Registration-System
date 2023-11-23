@@ -30,6 +30,7 @@ export default class ProviderController {
               res.status(200).send({
                 status: true,
                 message: "Fornecedor cadastrado!",
+                provider
               });
             })
             .catch((e) => {
@@ -105,7 +106,7 @@ export default class ProviderController {
     if (req.method === "DELETE") {
       const { document } = req.params;
       if (document) {
-        const provider = new Provider(document);
+        const provider = new Provider(0, document);
         provider
           .excluir()
           .then(() => {

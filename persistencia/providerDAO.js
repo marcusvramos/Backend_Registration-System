@@ -27,15 +27,14 @@ export default class ProviderDAO {
   async atualizar(provider) {
     if (provider instanceof Provider) {
       const sql =
-        "UPDATE supplier SET sup_document = ?, sup_name = ?, sup_phoneNumber = ?, sup_email = ?, sup_website = ?, sup_description = ? WHERE sup_id = ?";
+        "UPDATE supplier SET sup_name = ?, sup_phoneNumber = ?, sup_email = ?, sup_website = ?, sup_description = ? WHERE sup_document = ?";
       const parametros = [
-        provider.document,
         provider.name,
         provider.phoneNumber,
         provider.email,
         provider.website,
         provider.description,
-        provider.id,
+        provider.document,
       ];
       const conexao = await conectar();
       await conexao.execute(sql, parametros);
@@ -47,7 +46,7 @@ export default class ProviderDAO {
   async excluir(provider) {
     if (provider instanceof Provider) {
       const sql = "DELETE FROM supplier WHERE sup_document = ?";
-      const parametros = [provider.id];
+      const parametros = [provider.document];
       const conexao = await conectar();
       await conexao.execute(sql, parametros);
 
