@@ -1,3 +1,4 @@
+CREATE DATABASE sistema;
 USE sistema;
 
 CREATE TABLE category(
@@ -35,7 +36,7 @@ CREATE TABLE product(
 );
 
 CREATE TABLE client(
-    cli_id INT NOT NULL AUTO_INCREMENT,
+    cli_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     cli_document VARCHAR(11) NOT NULL,
     cli_name VARCHAR(20) NOT NULL,
     cli_neighborhood VARCHAR(20) NOT NULL,
@@ -44,4 +45,15 @@ CREATE TABLE client(
     cli_uf VARCHAR(2) NOT NULL,
     cli_number VARCHAR (5) NOT NULL,
     cli_zipCode VARCHAR(8) NOT NULL
+);
+
+CREATE TABLE purchase(
+    pur_id INT NOT NULL AUTO_INCREMENT,
+    pur_value DECIMAL(10,2) NOT NULL DEFAULT 0,
+    pur_quantity INT NOT NULL DEFAULT 0,
+    pur_providerId INT NOT NULL,
+    pur_paymentMethod VARCHAR(20) NOT NULL,
+    pur_code VARCHAR(20) NOT NULL,
+    CONSTRAINT pk_purchase PRIMARY KEY(pur_id),
+    CONSTRAINT fk_pur_providerId FOREIGN KEY(pur_providerId) REFERENCES supplier (sup_id)
 );

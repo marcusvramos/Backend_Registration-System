@@ -57,8 +57,8 @@ export default class ProviderDAO {
   async consultar(parametrosDaConsulta) {
     let sql = "";
     let parametros = [];
-    if (new Document(parametrosDaConsulta).isValid()) {
-      sql = "SELECT * FROM supplier WHERE sup_document = ? order by sup_name";
+    if (!isNaN(parametrosDaConsulta)) {
+      sql = "SELECT * FROM supplier WHERE sup_id = ? order by sup_name";
       parametros = [parametrosDaConsulta];
     } else if (parametrosDaConsulta != "") {
       sql = "SELECT * FROM supplier WHERE sup_name like ?";
