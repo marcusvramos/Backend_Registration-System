@@ -85,6 +85,7 @@ export default class Provider {
 
   toJSON() {
     return {
+      id: this.#id,
       document: this.#document,
       name: this.#name,
       phoneNumber: this.#phoneNumber,

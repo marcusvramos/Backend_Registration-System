@@ -57,7 +57,7 @@ export default class ProviderDAO {
   async consultar(parametrosDaConsulta) {
     let sql = "";
     let parametros = [];
-    if (!isNaN(parametrosDaConsulta)) {
+    if (parametrosDaConsulta && !isNaN(parametrosDaConsulta)) {
       sql = "SELECT * FROM supplier WHERE sup_id = ? order by sup_name";
       parametros = [parametrosDaConsulta];
     } else if (parametrosDaConsulta != "") {

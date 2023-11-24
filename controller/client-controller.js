@@ -42,6 +42,7 @@ export default class ClientController {
               res.status(200).send({
                 status: true,
                 message: "Cliente cadastrado!",
+                cliente: client
               });
             })
             .catch((e) => {

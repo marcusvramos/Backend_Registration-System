@@ -16,7 +16,7 @@ export default class ProductController {
           model,
           manufacturingDate,
           categoryId,
-          providerDocument,
+          providerId,
         } = req.body;
         if (
           name &&
@@ -27,14 +27,14 @@ export default class ProductController {
           model &&
           manufacturingDate &&
           categoryId &&
-          providerDocument
+          providerId
         ) {
           let category, provider;
 
           const categoriaPromise = new Category(categoryId).consultar(
             categoryId
           );
-          const provedorPromise = new Provider().consultar(providerDocument);
+          const provedorPromise = new Provider().consultar(providerId);
 
           categoriaPromise.then((resposta) => {
             category = resposta[0];
@@ -115,7 +115,7 @@ export default class ProductController {
         model,
         manufacturingDate,
         categoryId,
-        providerDocument,
+        providerId,
       } = req.body;
       const {id} = req.params;
       if (
@@ -128,12 +128,12 @@ export default class ProductController {
         model &&
         manufacturingDate &&
         categoryId &&
-        providerDocument
+        providerId
       ) {
         let category, provider;
 
         const categoriaPromise = new Category(categoryId).consultar(categoryId);
-        const provedorPromise = new Provider().consultar(providerDocument);
+        const provedorPromise = new Provider().consultar(providerId);
 
         categoriaPromise.then((resposta) => {
           category = resposta[0];
