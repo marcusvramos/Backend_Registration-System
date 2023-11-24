@@ -61,7 +61,6 @@ export default class ClientDAO {
   }
 
   async consultar(parametrosDaConsulta) {
-    console.log(parametrosDaConsulta);
     let sql = "";
     let parametros = [];
     if (!isNaN(parseInt(parametrosDaConsulta))) {

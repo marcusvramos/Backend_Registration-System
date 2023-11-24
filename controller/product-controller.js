@@ -68,6 +68,7 @@ export default class ProductController {
                   res.status(200).send({
                     status: true,
                     message: "Produto cadastrado!",
+                    product,
                   });
                 })
                 .catch((e) => {
