@@ -1,3 +1,4 @@
+import Client from "../model/client.js";
 import Sale from "../model/sale.js";
 import conectar from "./conexao.js";
 
@@ -22,14 +23,14 @@ export default class SaleDAO {
             ]
             const conexao = await conectar();
             const retorno = await conexao.execute(sql, parametros);
-            purchase.id = retorno[0].insertId;
+            sale.id = retorno[0].insertId;
             global.poolConexoes.releaseConnection(conexao);
         }
     }
 
     async atualizar(sale) {
         if (sale instanceof Sale) {
-            const sql = `UPDATE purchase SET sal_clientId = ?, sal_quantity = ?, sal_value = ?, sal_paymentMethod = ?, sal_code = ? WHERE sal_id = ?`
+            const sql = `UPDATE sale SET sal_clientId = ?, sal_quantity = ?, sal_value = ?, sal_paymentMethod = ?, sal_code = ? WHERE sal_id = ?`
             const parametros = [
                 sale.client.id,
                 sale.quantity,
@@ -47,7 +48,7 @@ export default class SaleDAO {
     async excluir(sale) {
         if (sale instanceof Sale) {
             const sql = `DELETE FROM sale WHERE sal_id = ?`
-            const parametros = [purchase.id]
+            const parametros = [sale.id]
             const conexao = await conectar();
             await conexao.execute(sql, parametros);
             global.poolConexoes.releaseConnection(conexao);
@@ -75,8 +76,8 @@ export default class SaleDAO {
                 c.cli_id,
                 c.cli_name,
                 c.cli_document,
-                c.cli_address
-                c.cli_neightborhood,
+                c.cli_address,
+                c.cli_neighborhood,
                 c.cli_city,
                 c.cli_uf,
                 c.cli_number,
@@ -100,8 +101,8 @@ export default class SaleDAO {
               c.cli_id,
               c.cli_name,
               c.cli_document,
-              c.cli_address
-              c.cli_neightborhood,
+              c.cli_address,
+              c.cli_neighborhood,
               c.cli_city,
               c.cli_uf,
               c.cli_number,
@@ -116,7 +117,7 @@ export default class SaleDAO {
         const [registros, campos] = await conexao.execute(sql, parametros);
 
         for (const registro of registros) {
-            const provider = new Client(
+            const client = new Client(
                 registro.cli_id,
                 registro.cli_name,
                 registro.cli_document,
@@ -128,16 +129,16 @@ export default class SaleDAO {
                 registro.cli_zipCode
             );
 
-            const purchase = new Sale(
+            const sale = new Sale(
                 registro.sal_id,
-                provider,
+                client,
                 registro.sal_quantity,
                 registro.sal_value,
                 registro.sal_paymentMethod,
                 registro.sal_code
             )
 
-            listaSales.push(purchase.toJSON())
+            listaSales.push(sale.toJSON())
         }
 
         return listaSales;

@@ -73,7 +73,7 @@ export default class Sale {
     }
 
     toString() {
-        return `Purchase: ${this.#id} - ${this.#client} - ${this.#quantity} - ${this.#value} - ${this.#paymentMethod} - ${this.#code}`
+        return `Sale: ${this.#id} - ${this.#client} - ${this.#quantity} - ${this.#value} - ${this.#paymentMethod} - ${this.#code}`
     }
 
     toJSON() {
@@ -104,7 +104,7 @@ export default class Sale {
 
     async consultar(termo){
         const salDAO = new SaleDAO();
-        const listaPurchases = await salDAO.consultar(termo);
-        return listaPurchases;
+        const listaSales = await salDAO.consultar(termo);
+        return listaSales;
     }
 }

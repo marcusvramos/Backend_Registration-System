@@ -64,7 +64,7 @@ export default class SaleController {
                 const { clientId, quantity, value, paymentMethod, code } = req.body;
                 if (id && clientId && quantity && value && paymentMethod && code) {
                     let client;
-                    const clientPromise = new client(clientId).consultar();
+                    const clientPromise = new Client(clientId).consultar(clientId);
                     clientPromise.then((resposta) => {
                         client = resposta[0];
                         if (!client) {
@@ -74,7 +74,7 @@ export default class SaleController {
                             })
                         }
                         const sale = new Sale(id, client, quantity, value, paymentMethod, code);
-                        const salePromise = new Sale().atualizar(sale);
+                        const salePromise = sale.atualizar();
                         salePromise.then((resposta) => {
                             return res.status(201).send({
                                 status: true,
@@ -114,10 +114,10 @@ export default class SaleController {
         res.type('application/json');
         if (req.method === "DELETE") {
             try {
-                const { id } = req.body;
+                const { id } = req.params;
                 if (id) {
                     const sale = new Sale(id);
-                    const salePromise = new Sale().excluir(sale);
+                    const salePromise = sale.excluir();
                     salePromise.then((resposta) => {
                         return res.status(201).send({
                             status: true,
