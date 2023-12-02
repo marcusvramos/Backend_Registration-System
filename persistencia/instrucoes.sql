@@ -57,3 +57,14 @@ CREATE TABLE purchase(
     CONSTRAINT pk_purchase PRIMARY KEY(pur_id),
     CONSTRAINT fk_pur_providerId FOREIGN KEY(pur_providerId) REFERENCES supplier (sup_id)
 );
+
+CREATE TABLE sale(
+    sal_id INT NOT NULL AUTO_INCREMENT,
+    sal_value DECIMAL(10,2) NOT NULL DEFAULT 0,
+    sal_quantity INT NOT NULL DEFAULT 0,
+    sal_clientId INT NOT NULL,
+    sal_paymentMethod VARCHAR(20) NOT NULL,
+    sal_code VARCHAR(20) NOT NULL,
+    CONSTRAINT pk_sale PRIMARY KEY(sal_id),
+    CONSTRAINT fk_sal_clientId FOREIGN KEY(sal_clientId) REFERENCES client (cli_id)
+);

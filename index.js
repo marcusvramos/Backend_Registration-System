@@ -5,6 +5,7 @@ import providerRoute from "./routes/provider-route.js";
 import productRoute from "./routes/product-route.js";
 import clientRoute from './routes/client-route.js';
 import purchaseRoute from "./routes/purchase-route.js";
+import saleRoute from "./routes/sale-route.js";
 const app = express();
 
 app.use(
@@ -25,6 +26,7 @@ app.use("/provider", providerRoute);
 app.use("/product", productRoute);
 app.use("/client", clientRoute);
 app.use("/purchase", purchaseRoute );
+app.use("/sale", saleRoute );
 
 app.get("/", (req, res) => {
   res.send("Olá");
