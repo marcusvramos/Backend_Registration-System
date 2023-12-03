@@ -25,7 +25,7 @@ export default class SaleController {
                             return res.status(201).send({
                                 status: true,
                                 message: "Venda cadastrada com sucesso!",
-                                data: resposta
+                                lista: resposta
                             })
                         }).catch((erro) => {
                             return res.status(400).send({
@@ -156,13 +156,13 @@ export default class SaleController {
                     return res.status(201).send({
                         status: true,
                         message: "Venda consultada com sucesso!",
-                        data: resposta
+                        lista: resposta
                     })
                 }).catch((erro) => {
                     return res.status(400).send({
                         status: false,
                         message: "Erro ao consultar a venda!",
-                        data: erro
+                        lista: erro
                     })
                 })
             } catch (e) {

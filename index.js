@@ -32,4 +32,6 @@ app.get("/", (req, res) => {
   res.send("Olá");
 });
 
-app.listen(4000);
+app.listen(4000, () => {
+  console.log("API rodando na porta 4000");
+});
