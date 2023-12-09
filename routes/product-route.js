@@ -4,10 +4,11 @@ import ProductController from "../controller/product-controller.js";
 const productRoute = new Router();
 const controller = new ProductController();
 
-productRoute.post("/", controller.post);
-productRoute.put("/:id", controller.put);
-productRoute.delete("/:id", controller.delete);
-productRoute.get("/", controller.get);
-productRoute.get("/:id", controller.get);
+productRoute
+  .post("/", controller.post)
+  .put("/:id", controller.put)
+  .delete("/:id", controller.delete)
+  .get("/:id", controller.get)
+  .get("/", controller.get);
 
 export default productRoute;
