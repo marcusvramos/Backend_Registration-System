@@ -30,9 +30,9 @@ export default class PurchaseDAO {
 
     async atualizar(purchase) {
         if (purchase instanceof Purchase) {
-            const sql = `UPDATE purchase SET pur_providerId = ?, pur_quantity = ?, pur_value = ?, pur_paymentMethod = ?, pur_purchaseCode = ? WHERE pur_id = ?`
+            const sql = `UPDATE purchase SET pur_providerId = ?, pur_quantity = ?, pur_value = ?, pur_paymentMethod = ?, pur_code = ? WHERE pur_id = ?`
             const parametros = [
-                purchase.provider.document,
+                purchase.provider.id,
                 purchase.quantity,
                 purchase.value,
                 purchase.paymentMethod,
@@ -48,7 +48,7 @@ export default class PurchaseDAO {
     async excluir(purchase) {
         if (purchase instanceof Purchase) {
             const sql = `DELETE FROM purchase WHERE pur_id = ?`
-            const parametros = [purchase.id]
+            const parametros = [Number(purchase.id)]
             const conexao = await conectar();
             await conexao.execute(sql, parametros);
             global.poolConexoes.releaseConnection(conexao);
@@ -133,7 +133,7 @@ export default class PurchaseDAO {
                 registro.pur_quantity,
                 registro.pur_value,
                 registro.pur_paymentMethod,
-                registro.pur_purchaseCode
+                registro.pur_code
             )
 
             listaPurchases.push(purchase.toJSON())

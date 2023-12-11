@@ -64,7 +64,7 @@ export default class PurchaseController {
                 const { providerId, quantity, value, paymentMethod, purchaseCode } = req.body;
                 if (id && providerId && quantity && value && paymentMethod && purchaseCode) {
                     let provider;
-                    const providerPromise = new Provider(providerId).consultar();
+                    const providerPromise = new Provider(providerId).consultar(providerId);
                     providerPromise.then((resposta) => {
                         provider = resposta[0];
                         if (!provider) {
@@ -74,7 +74,7 @@ export default class PurchaseController {
                             })
                         }
                         const purchase = new Purchase(id, provider, quantity, value, paymentMethod, purchaseCode);
-                        const purchasePromise = new Purchase().atualizar(purchase);
+                        const purchasePromise = purchase.atualizar(purchase);
                         purchasePromise.then((resposta) => {
                             return res.status(201).send({
                                 status: true,
@@ -114,10 +114,10 @@ export default class PurchaseController {
         res.type('application/json');
         if (req.method === "DELETE") {
             try {
-                const { id } = req.body;
+                const { id } = req.params;
                 if (id) {
                     const purchase = new Purchase(id);
-                    const purchasePromise = new Purchase().excluir(purchase);
+                    const purchasePromise = purchase.excluir(purchase);
                     purchasePromise.then((resposta) => {
                         return res.status(201).send({
                             status: true,
