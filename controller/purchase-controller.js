@@ -25,7 +25,7 @@ export default class PurchaseController {
                             return res.status(201).send({
                                 status: true,
                                 message: "Compra cadastrada com sucesso!",
-                                data: resposta
+                                purchase: purchase
                             })
                         }).catch((erro) => {
                             return res.status(400).send({

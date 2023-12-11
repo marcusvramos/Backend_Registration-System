@@ -25,7 +25,7 @@ export default class SaleController {
                             return res.status(201).send({
                                 status: true,
                                 message: "Venda cadastrada com sucesso!",
-                                lista: resposta
+                                sale: sale
                             })
                         }).catch((erro) => {
                             return res.status(400).send({
